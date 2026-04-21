@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./images/favicon-32x32.png"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<title>Frontend Mentor | Loopstudios landing page</title>
+	</head>
+	<body>
+		<header class="navbar">
+			<div class="wrapper">
+				<a class="logo" href="/" aria-label="homepage">
+					<img src="./images/logo.svg" alt="Loopstudios logo" />
+					<span class="sr-only">Homepage</span>
+				</a>
+				<nav aria-label="Primary Navigation">
+					<ul>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Careers</a></li>
+						<li><a href="#">Events</a></li>
+						<li><a href="#">Products</a></li>
+						<li><a href="#">Support</a></li>
+					</ul>
+				</nav>
+				<h1 class="hero-text">Immersive experiences that deliver</h1>
+			</div>
+			<div class="hero-image">
+				<picture>
+					<source
+						media="(min-width: 768px)"
+						srcset="images/desktop/image-hero.jpg"
+					/>
+					<img src="images/mobile/image-hero.jpg" alt="" class="img" />
+				</picture>
+			</div>
+		</header>
+		<main class="wrapper">
+			<section>
+				<h2>The leader in interactive VR</h2>
+				<p>
+					Founded in 2011, Loopstudios has been producing world-class virtual
+					reality projects for some of the best companies around the globe. Our
+					award-winning creations have transformed businesses through digital
+					experiences that bind to their brand.
+				</p>
+			</section>
+
+			<section>
+				<h2>Our creations</h2>
+				<div class="card">
+					<div class="card-image"></div>
+					<div class="card-title"></div>
+				</div>
+				<button class="btn btn__primary">See all</button>
+			</section>
+
+			<!-- Deep earth Night arcade Soccer team VR The grid From up above VR Pocket
+			borealis The curiosity Make it fisheye -->
+		</main>
+		<footer class="">
+			<div class="wrapper">
+				<a class="logo" href="/" aria-label="homepage">
+					<img src="./images/logo.svg" alt="Loopstudios logo" />
+					<span class="sr-only">Homepage</span>
+				</a>
+				<nav aria-label="Social Navigation">
+					<ul>
+						<li><a href="#"></a></li>
+						<li><a href="#"></a></li>
+						<li><a href="#"></a></li>
+						<li><a href="#"></a></li>
+					</ul>
+				</nav>
+				<nav aria-label="Footer Navigation">
+					<ul>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Careers</a></li>
+						<li><a href="#">Events</a></li>
+						<li><a href="#">Products</a></li>
+						<li><a href="#">Support</a></li>
+					</ul>
+				</nav>
+
+				<p>© <span id="year"></span> Loopstudios. All rights reserved.</p>
+			</div>
+		</footer>
+
+		<script>
+			document.getElementById('year').innerHTML = new Date().getFullYear();
+		</script>
+	</body>
+</html>

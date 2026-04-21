@@ -1,0 +1,435 @@
+/* ----------------  */
+/* Variables    */
+/* ----------------  */
+
+// Colors (Primitives)
+$clr-neutral-900: 0 0% 0%;
+$clr-neutral-100: 0 100% 100%;
+
+$clr-grey-200: 0 0% 85%;
+
+$clr-blue-100: 215 30% 92%;
+$clr-blue-50: 213 100% 98%;
+
+// Gradients
+$gradient-primary: linear-gradient(
+	90deg,
+	hsl($clr-neutral-900) 0%,
+	hsl($clr-neutral-900) 60%
+);
+
+// Semantics (Using SCSS variables for consistency)
+// $btn-bg: hsl($clr-green-600);
+// $btn-bg-hover: hsl($clr-green-600);
+// $btn-text: hsl($clr-neutral-100);
+
+// $text-main: hsl($clr-neutral-900);
+// $text-muted: hsl($clr-neutral-400);
+// $heading-color: hsl($clr-neutral-900);
+
+// $bg-main: hsl($clr-neutral-100);
+// $bg-subtle: hsl($clr-neutral-400);
+
+// Typography
+$fs-900: clamp(2.5rem, 2.1rem + 2vw, 4.5rem);
+$fs-800: clamp(2rem, 1.8rem + 1vw, 3rem);
+$fs-700: 2.5rem;
+$fs-600: 2rem;
+$fs-500: 1.5rem;
+$fs-400: 0.9375rem;
+$fs-300: 0.875rem;
+
+$ff-titles: 'Josefin Sans', sans-serif;
+$ff-text: 'Alata', sans-serif;
+
+$fw-700: 700;
+$fw-400: 400;
+$fw-300: 300;
+
+@mixin text-preset-1 {
+	font: #{$fw-300} #{$fs-900}/ 1 #{$ff-titles};
+	text-transform: uppercase;
+}
+
+@mixin text-preset-2 {
+	font: #{$fw-300} #{$fs-800}/ 1 #{$ff-titles};
+	text-transform: uppercase;
+}
+
+@mixin text-preset-3 {
+	font: #{$fw-300} #{$fs-700}/ 1 #{$ff-titles};
+	text-transform: uppercase;
+}
+
+@mixin text-preset-4 {
+	font: #{$fw-300} #{$fs-600}/ 1 #{$ff-titles};
+	text-transform: uppercase;
+}
+
+@mixin text-preset-5 {
+	font: #{$fw-300} #{$fs-500}/ 1 #{$ff-titles};
+	text-transform: uppercase;
+}
+
+@mixin text-preset-6 {
+	font: #{$fw-400} #{$fs-400}/ 1.65 #{$ff-text};
+}
+
+@mixin text-preset-7 {
+	font: #{$fw-400} #{$fs-300}/ 1 #{$ff-text};
+	letter-spacing: 5px;
+}
+
+// Spacing
+$spacing-1000: 5rem;
+$spacing-900: 4.5rem;
+$spacing-800: 4rem;
+$spacing-700: 3.5rem;
+$spacing-600: 3rem;
+$spacing-500: 2.5rem;
+$spacing-400: 2rem;
+$spacing-300: 1.5rem;
+$spacing-200: 1rem;
+$spacing-150: 0.625rem;
+$spacing-100: 0.5rem;
+$spacing-0: 0rem;
+
+$wrapper-max-width: 70rem;
+$spacing-inline: 1em;
+$spacing-block-start: 1.75rem;
+
+/* ----------------  */
+/* Custom Fonts      */
+/* ----------------  */
+
+@font-face {
+	font-family: 'Alata';
+	src: url('./assets/fonts/Alata-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Josefin Sans';
+	src: url('./assets/fonts/JosefinSans-VariableFont_wght.ttf')
+		format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+/* ----------------  */
+/* Reset             */
+/* ----------------  */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	background-repeat: no-repeat;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+	block-size: 100%;
+	scrollbar-gutter: stable;
+}
+
+img,
+iframe,
+audio,
+video,
+canvas {
+	display: block;
+	max-inline-size: 100%;
+	block-size: auto;
+}
+
+svg {
+	max-inline-size: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+textarea {
+	resize: vertical;
+}
+
+fieldset,
+iframe {
+	border: none;
+}
+
+ul {
+	list-style-type: none;
+}
+
+// Typography Reset
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+p {
+	text-wrap: pretty;
+	font-variant-numeric: proportional-nums;
+	font-weight: $fw-400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font: {
+		family: $ff-titles;
+		variant-numeric: lining-nums;
+		weight: $fw-400;
+	}
+}
+
+input,
+label,
+button,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+picture {
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: hsl($clr-neutral-100);
+}
+
+body {
+	@include text-preset-6;
+
+	min-block-size: 100svh;
+	background-color: hsl($clr-neutral-100);
+	color: hsl($clr-neutral-900);
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	overflow-x: hidden;
+	margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* -----------------  */
+/* Utility Classes    */
+/* -----------------  */
+
+/* General Layout */
+
+.flex {
+	display: flex;
+	// Uses the $spacing-200 variable, but allows override via inline style --gap
+	gap: var(--gap, $spacing-200);
+}
+
+.grid {
+	display: grid;
+	gap: var(--gap, $spacing-200);
+}
+
+.d-block {
+	display: block;
+}
+
+// Flow utility: Adds margin to siblings
+.flow {
+	> *:where(:not(:first-child)) {
+		margin-inline-start: var(--flow-space, $spacing-200);
+	}
+}
+
+.flow--space-small {
+	--flow-space: $spacing-150; // Uses SCSS variable for the default override
+}
+
+.wrapper {
+	width: min(95vw, $wrapper-max-width);
+	margin-inline: auto;
+	padding-inline: $spacing-inline;
+	padding-block-start: $spacing-block-start;
+}
+
+// Screen Reader Only
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+[hidden] {
+	display: none;
+}
+
+// Skip Link
+.skip-to-content {
+	position: absolute;
+	z-index: 9999;
+	// Using our SCSS color variables directly
+	background-color: hsl($clr-neutral-100);
+	color: hsl($clr-neutral-900);
+	padding: $spacing-100 $spacing-200; // 0.5rem 1rem
+	margin-inline: auto;
+	transform: translateY(-100%);
+	transition: transform 500ms ease-in-out;
+
+	// Nesting the focus state using &
+	&:focus {
+		transform: translateY(0);
+	}
+}
+
+/* Colors */
+
+/* Typography */
+
+.letter-spacing-1 {
+	letter-spacing: 4.75px;
+}
+
+.letter-spacing-2 {
+	letter-spacing: 2.7px;
+}
+
+.letter-spacing-3 {
+	letter-spacing: 2.35px;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.fw-700 {
+	font-weight: $fw-700;
+}
+
+.fw-400 {
+	font-weight: $fw-400;
+}
+
+h1,
+.looks-h1 {
+	@include text-preset-1;
+	color: hsl($clr-neutral-100);
+}
+
+h2,
+.looks-h2 {
+	@include text-preset-2;
+}
+
+/* ----------------  */
+/* Components        */
+/* ----------------  */
+
+header {
+	height: 40rem;
+	position: relative;
+}
+
+.hero-image {
+	position: absolute;
+	top: 0;
+	z-index: -10;
+}
+
+nav {
+	display: flex;
+	flex-direction: column;
+
+	header & {
+		text-transform: uppercase;
+	}
+
+	footer & {
+		text-align: center;
+	}
+}
+
+.btn {
+	@include text-preset-7;
+
+	cursor: pointer;
+	display: block;
+	text-transform: uppercase;
+	background-color: hsl($clr-neutral-100);
+	border: 1px solid hsl($clr-neutral-900);
+	padding: $spacing-150 $spacing-500;
+	margin: 0 auto;
+
+	&:hover,
+	&:focus {
+		background-color: hsl($clr-neutral-900);
+		color: hsl($clr-neutral-100);
+		border-color: hsl($clr-neutral-100);
+	}
+}
+
+/* ----------------  */
+/* Page Specific     */
+/* ----------------  */
+
+/* ----------------  */
+/* Layout            */
+/* ----------------  */
+
+footer {
+	background-color: hsl($clr-neutral-900);
+}
