@@ -2,33 +2,35 @@
 /* Variables    */
 /* ----------------  */
 
-// Colors (Primitives)
-$clr-neutral-900: 0 0% 0%;
-$clr-neutral-100: 0 100% 100%;
+:root {
+	// Colors (Primitives)
+	--clr-neutral-900: 0 0% 0%;
+	--clr-neutral-100: 0 100% 100%;
 
-$clr-grey-200: 0 0% 85%;
+	--clr-grey-200: 0 0% 85%;
 
-$clr-blue-100: 215 30% 92%;
-$clr-blue-50: 213 100% 98%;
+	--clr-blue-100: 215 30% 92%;
+	--clr-blue-50: 213 100% 98%;
 
-// Gradients
-$gradient-primary: linear-gradient(
-	90deg,
-	hsl($clr-neutral-900) 0%,
-	hsl($clr-neutral-900) 60%
-);
+	// Gradients
+	$gradient-primary: linear-gradient(
+		90deg,
+		hsl(var(--clr-neutral-900) 0%),
+		hsl(var(--clr-neutral-900) 60%)
+	);
+}
 
 // Semantics (Using SCSS variables for consistency)
-// $btn-bg: hsl($clr-green-600);
-// $btn-bg-hover: hsl($clr-green-600);
-// $btn-text: hsl($clr-neutral-100);
+// $btn-bg: hsl(var(--clr-green-600);
+// $btn-bg-hover: hsl(var(--clr-green-600);
+// $btn-text: hsl(var(--clr-neutral-100);
 
-// $text-main: hsl($clr-neutral-900);
-// $text-muted: hsl($clr-neutral-400);
-// $heading-color: hsl($clr-neutral-900);
+// $text-main: hsl(var(--clr-neutral-900);
+// $text-muted: hsl(var(--clr-neutral-400);
+// $heading-color: hsl(var(--clr-neutral-900);
 
-// $bg-main: hsl($clr-neutral-100);
-// $bg-subtle: hsl($clr-neutral-400);
+// $bg-main: hsl(var(--clr-neutral-100);
+// $bg-subtle: hsl(var(--clr-neutral-400);
 
 // Typography
 $fs-900: clamp(2.5rem, 2.1rem + 2vw, 4.5rem);
@@ -236,15 +238,15 @@ picture {
 
 a {
 	text-decoration: none;
-	color: hsl($clr-neutral-100);
+	color: hsl(var(--clr-neutral-100));
 }
 
 body {
 	@include text-preset-6;
 
 	min-block-size: 100svh;
-	background-color: hsl($clr-neutral-100);
-	color: hsl($clr-neutral-900);
+	background-color: hsl(var(--clr-neutral-100));
+	color: hsl(var(--clr-neutral-900));
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 	overflow-x: hidden;
@@ -323,8 +325,8 @@ body {
 	position: absolute;
 	z-index: 9999;
 	// Using our SCSS color variables directly
-	background-color: hsl($clr-neutral-100);
-	color: hsl($clr-neutral-900);
+	background-color: hsl(var(--clr-neutral-100));
+	color: hsl(var(--clr-neutral-900));
 	padding: $spacing-100 $spacing-200; // 0.5rem 1rem
 	margin-inline: auto;
 	transform: translateY(-100%);
@@ -367,7 +369,7 @@ body {
 h1,
 .looks-h1 {
 	@include text-preset-1;
-	color: hsl($clr-neutral-100);
+	color: hsl(var(--clr-neutral-100));
 }
 
 h2,
@@ -409,16 +411,16 @@ nav {
 	cursor: pointer;
 	display: block;
 	text-transform: uppercase;
-	background-color: hsl($clr-neutral-100);
-	border: 1px solid hsl($clr-neutral-900);
+	background-color: hsl(var(--clr-neutral-100));
+	border: 1px solid hsl(var(--clr-neutral-900));
 	padding: $spacing-150 $spacing-500;
 	margin: 0 auto;
 
 	&:hover,
 	&:focus {
-		background-color: hsl($clr-neutral-900);
-		color: hsl($clr-neutral-100);
-		border-color: hsl($clr-neutral-100);
+		background-color: hsl(var(--clr-neutral-900));
+		color: hsl(var(--clr-neutral-100));
+		border-color: hsl(var(--clr-neutral-100));
 	}
 }
 
@@ -431,5 +433,5 @@ nav {
 /* ----------------  */
 
 footer {
-	background-color: hsl($clr-neutral-900);
+	background-color: hsl(var(--clr-neutral-900));
 }
