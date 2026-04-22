@@ -82,19 +82,20 @@ $fw-300: 300;
 	letter-spacing: 5px;
 }
 
-// Spacing
-$spacing-1000: 5rem;
-$spacing-900: 4.5rem;
-$spacing-800: 4rem;
-$spacing-700: 3.5rem;
-$spacing-600: 3rem;
-$spacing-500: 2.5rem;
-$spacing-400: 2rem;
-$spacing-300: 1.5rem;
-$spacing-200: 1rem;
-$spacing-150: 0.625rem;
-$spacing-100: 0.5rem;
-$spacing-0: 0rem;
+// size
+$size-96: 6rem;
+$size-80: 5rem;
+$size-72: 4.5rem;
+$size-64: 4rem;
+$size-56: 3.5rem;
+$size-48: 3rem;
+$size-40: 2.5rem;
+$size-32: 2rem;
+$size-24: 1.5rem;
+$size-16: 1rem;
+$size-10: 0.625rem;
+$size-8: 0.5rem;
+$size-0: 0rem;
 
 $wrapper-max-width: 70rem;
 $spacing-inline: 1em;
@@ -269,33 +270,6 @@ body {
 /* -----------------  */
 
 /* General Layout */
-
-.flex {
-	display: flex;
-	// Uses the $spacing-200 variable, but allows override via inline style --gap
-	gap: var(--gap, $spacing-200);
-}
-
-.grid {
-	display: grid;
-	gap: var(--gap, $spacing-200);
-}
-
-.d-block {
-	display: block;
-}
-
-// Flow utility: Adds margin to siblings
-.flow {
-	> *:where(:not(:first-child)) {
-		margin-inline-start: var(--flow-space, $spacing-200);
-	}
-}
-
-.flow--space-small {
-	--flow-space: $spacing-150; // Uses SCSS variable for the default override
-}
-
 .wrapper {
 	width: min(95vw, $wrapper-max-width);
 	margin-inline: auto;
@@ -324,15 +298,13 @@ body {
 .skip-to-content {
 	position: absolute;
 	z-index: 9999;
-	// Using our SCSS color variables directly
 	background-color: hsl(var(--clr-neutral-100));
 	color: hsl(var(--clr-neutral-900));
-	padding: $spacing-100 $spacing-200; // 0.5rem 1rem
+	padding: $size-8 $size-16; // 0.5rem 1rem
 	margin-inline: auto;
 	transform: translateY(-100%);
 	transition: transform 500ms ease-in-out;
 
-	// Nesting the focus state using &
 	&:focus {
 		transform: translateY(0);
 	}
@@ -341,31 +313,6 @@ body {
 /* Colors */
 
 /* Typography */
-
-.letter-spacing-1 {
-	letter-spacing: 4.75px;
-}
-
-.letter-spacing-2 {
-	letter-spacing: 2.7px;
-}
-
-.letter-spacing-3 {
-	letter-spacing: 2.35px;
-}
-
-.uppercase {
-	text-transform: uppercase;
-}
-
-.fw-700 {
-	font-weight: $fw-700;
-}
-
-.fw-400 {
-	font-weight: $fw-400;
-}
-
 h1,
 .looks-h1 {
 	@include text-preset-1;
@@ -381,15 +328,26 @@ h2,
 /* Components        */
 /* ----------------  */
 
-header {
-	height: 40rem;
+.hero {
 	position: relative;
-}
+	height: 40rem;
+	max-width: 100%;
+	overflow: hidden;
 
-.hero-image {
-	position: absolute;
-	top: 0;
-	z-index: -10;
+	&__text {
+		border: 1px solid hsl(var(--clr-neutral-100));
+		padding: $size-16 $size-24;
+	}
+
+	&__image {
+		position: absolute;
+		top: 0;
+		z-index: -10;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		// how to get height of the image take up the height of the header
+	}
 }
 
 nav {
@@ -405,6 +363,118 @@ nav {
 	}
 }
 
+.nav__pages {
+	ul {
+		display: grid;
+		gap: $size-16;
+	}
+}
+
+.nav__socials {
+	ul {
+		display: grid;
+		place-items: center;
+		grid-template-columns: repeat(4, 1fr);
+		gap: $size-16;
+
+		a {
+			span {
+				display: grid;
+				place-items: center;
+				height: 24px;
+				width: 24px;
+			}
+		}
+	}
+}
+
+header .nav {
+	// Mobile: only show the button, hide the list
+	ul {
+		display: none;
+	}
+
+	&[data-open] {
+		display: flex;
+		flex-direction: column;
+		position: fixed;
+		inset: 0;
+		z-index: 100;
+		background-color: hsl(var(--clr-neutral-900));
+		padding: $size-96 $size-40;
+
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: $size-24;
+		}
+	}
+
+	@media (min-width: 45em) {
+		ul {
+			display: flex;
+			flex-direction: row;
+			gap: $size-40;
+		}
+	}
+}
+
+.hamburger {
+	background: none;
+	border: none;
+	cursor: pointer;
+
+	.hamburger__icon--open {
+		display: inline-block;
+	}
+	.hamburger__icon--close {
+		display: none;
+		position: absolute;
+		top: $size-32;
+		right: $size-32;
+		z-index: 101;
+	}
+
+	&[aria-expanded='true'] {
+		.hamburger__icon--open {
+			display: none;
+		}
+		.hamburger__icon--close {
+			display: inline-block;
+		}
+	}
+
+	@media (min-width: 45em) {
+		display: none;
+	}
+}
+
+.section {
+	text-align: center;
+	margin-block: $size-96;
+	&__image {
+		margin-block-end: $size-48;
+	}
+	&__title {
+		margin-block-end: $size-16;
+	}
+	&__text {
+		@include text-preset-6;
+
+		opacity: 0.5;
+		text-align: center;
+	}
+	@media (min-width: 45em) {
+		text-align: left;
+	}
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .btn {
 	@include text-preset-7;
 
@@ -413,8 +483,8 @@ nav {
 	text-transform: uppercase;
 	background-color: hsl(var(--clr-neutral-100));
 	border: 1px solid hsl(var(--clr-neutral-900));
-	padding: $spacing-150 $spacing-500;
-	margin: 0 auto;
+	padding: $size-10 $size-40;
+	margin: $size-32 auto;
 
 	&:hover,
 	&:focus {
@@ -434,4 +504,22 @@ nav {
 
 footer {
 	background-color: hsl(var(--clr-neutral-900));
+	padding-block: $size-56;
+
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: $size-40;
+	}
+
+	p {
+		@include text-preset-6;
+
+		color: hsl(var(--clr-neutral-100));
+		opacity: 0.5;
+		text-align: center;
+		margin-block-start: $size-16;
+	}
 }
