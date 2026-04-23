@@ -11,14 +11,14 @@
 
 	--clr-blue-100: 215 30% 92%;
 	--clr-blue-50: 213 100% 98%;
-
-	// Gradients
-	$gradient-primary: linear-gradient(
-		90deg,
-		hsl(var(--clr-neutral-900) 0%),
-		hsl(var(--clr-neutral-900) 60%)
-	);
 }
+
+// Gradients
+$gradient-primary: linear-gradient(
+	-90deg,
+	hsl(0 0% 0% / 0%),
+	hsl(0 0% 0% / 60%)
+);
 
 // Semantics (Using SCSS variables for consistency)
 // $btn-bg: hsl(var(--clr-green-600);
@@ -269,6 +269,12 @@ body {
 /* Utility Classes    */
 /* -----------------  */
 
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 /* General Layout */
 .wrapper {
 	width: min(95vw, $wrapper-max-width);
@@ -330,13 +336,20 @@ h2,
 
 .hero {
 	position: relative;
-	height: 40rem;
 	max-width: 100%;
+	height: 40rem;
 	overflow: hidden;
+
+	.wrapper {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
 
 	&__text {
 		border: 1px solid hsl(var(--clr-neutral-100));
 		padding: $size-16 $size-24;
+		margin-block: auto;
 	}
 
 	&__image {
@@ -346,7 +359,6 @@ h2,
 		height: 100%;
 		width: 100%;
 		object-fit: cover;
-		// how to get height of the image take up the height of the header
 	}
 }
 
@@ -389,7 +401,6 @@ nav {
 }
 
 header .nav {
-	// Mobile: only show the button, hide the list
 	ul {
 		display: none;
 	}
@@ -469,10 +480,34 @@ header .nav {
 	}
 }
 
-.flex {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+.cards-section {
+	display: grid;
+	gap: $size-24;
+}
+
+.card {
+	position: relative;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		background: $gradient-primary;
+		pointer-events: none;
+	}
+	&__title {
+		@include text-preset-5;
+
+		color: hsl(var(--clr-neutral-100));
+		position: absolute;
+		z-index: 10;
+		bottom: $size-16;
+		left: $size-16;
+		width: 8ch;
+		text-align: left;
+	}
 }
 
 .btn {
@@ -493,10 +528,6 @@ header .nav {
 		border-color: hsl(var(--clr-neutral-100));
 	}
 }
-
-/* ----------------  */
-/* Page Specific     */
-/* ----------------  */
 
 /* ----------------  */
 /* Layout            */
@@ -522,4 +553,8 @@ footer {
 		text-align: center;
 		margin-block-start: $size-16;
 	}
+}
+
+.footer-logo {
+	height: 24px;
 }
