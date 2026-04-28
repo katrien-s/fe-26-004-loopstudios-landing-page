@@ -365,39 +365,6 @@ h2,
 nav {
 	display: flex;
 	flex-direction: column;
-
-	header & {
-		text-transform: uppercase;
-	}
-
-	footer & {
-		text-align: center;
-	}
-}
-
-.nav__pages {
-	ul {
-		display: grid;
-		gap: $size-16;
-	}
-}
-
-.nav__socials {
-	ul {
-		display: grid;
-		place-items: center;
-		grid-template-columns: repeat(4, 1fr);
-		gap: $size-16;
-
-		a {
-			span {
-				display: grid;
-				place-items: center;
-				height: 24px;
-				width: 24px;
-			}
-		}
-	}
 }
 
 header .nav {
@@ -422,6 +389,13 @@ header .nav {
 	}
 
 	@media (min-width: 45em) {
+		// even nagaan of dit echt wel wekt. Deze blok is om te vermijden dat het zwarte display zichtbaar blijft als per toeval het mobiele menu nog openstaat op desktop.
+		display: flex;
+		position: static;
+		background: transparent;
+		padding: 0;
+		z-index: auto;
+
 		ul {
 			display: flex;
 			flex-direction: row;
@@ -481,8 +455,14 @@ header .nav {
 }
 
 .cards-section {
-	display: grid;
-	gap: $size-24;
+	.grid {
+		display: grid;
+		gap: $size-24;
+
+		@media (min-width: 45em) {
+			grid-template-columns: repeat(auto-fill, 256px);
+		}
+	}
 }
 
 .card {
@@ -505,7 +485,7 @@ header .nav {
 		z-index: 10;
 		bottom: $size-16;
 		left: $size-16;
-		width: 8ch;
+		width: 10ch;
 		text-align: left;
 	}
 }
@@ -529,6 +509,42 @@ header .nav {
 	}
 }
 
+.nav__pages {
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: $size-16;
+
+		@media (min-width: 35em) {
+			flex-direction: row;
+		}
+	}
+}
+
+.nav__socials {
+	align-items: center;
+
+	@media (min-width: 35em) {
+		align-items: end;
+	}
+
+	ul {
+		display: grid;
+		place-items: center;
+		grid-template-columns: repeat(4, 1fr);
+		gap: $size-16;
+
+		a {
+			span {
+				display: grid;
+				place-items: center;
+				height: 24px;
+				width: 24px;
+			}
+		}
+	}
+}
+
 /* ----------------  */
 /* Layout            */
 /* ----------------  */
@@ -537,12 +553,42 @@ footer {
 	background-color: hsl(var(--clr-neutral-900));
 	padding-block: $size-56;
 
+	nav {
+		text-align: center;
+
+		@media (min-width: 35em) {
+			align-items: end;
+		}
+	}
+
 	.wrapper {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+		display: grid;
+		grid-template-columns: 1fr;
 		gap: $size-40;
+		justify-content: center;
+
+		@media (min-width: 35em) {
+			grid-template-columns: repeat(2, 1fr);
+
+			.footer-logo {
+				grid-column: 1;
+				grid-row: 1;
+			}
+			.nav__pages {
+				grid-column: 1;
+				grid-row: 2;
+				align-items: start;
+			}
+			.nav__socials {
+				grid-column: 2;
+				grid-row: 1;
+				align-items: end;
+			}
+			p {
+				grid-column: 2;
+				grid-row: 2;
+			}
+		}
 	}
 
 	p {
@@ -552,9 +598,19 @@ footer {
 		opacity: 0.5;
 		text-align: center;
 		margin-block-start: $size-16;
+
+		@media (min-width: 35em) {
+			margin-block-start: unset;
+			text-align: right;
+		}
 	}
 }
 
 .footer-logo {
 	height: 24px;
+	margin-inline: auto;
+
+	@media (min-width: 35em) {
+		margin: unset;
+	}
 }
