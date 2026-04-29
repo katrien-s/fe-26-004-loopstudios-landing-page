@@ -20,18 +20,6 @@ $gradient-primary: linear-gradient(
 	hsl(0 0% 0% / 60%)
 );
 
-// Semantics (Using SCSS variables for consistency)
-// $btn-bg: hsl(var(--clr-green-600);
-// $btn-bg-hover: hsl(var(--clr-green-600);
-// $btn-text: hsl(var(--clr-neutral-100);
-
-// $text-main: hsl(var(--clr-neutral-900);
-// $text-muted: hsl(var(--clr-neutral-400);
-// $heading-color: hsl(var(--clr-neutral-900);
-
-// $bg-main: hsl(var(--clr-neutral-100);
-// $bg-subtle: hsl(var(--clr-neutral-400);
-
 // Typography
 $fs-900: clamp(2.5rem, 2.1rem + 2vw, 4.5rem);
 $fs-800: clamp(2rem, 1.8rem + 1vw, 3rem);
@@ -242,6 +230,11 @@ a {
 	color: hsl(var(--clr-neutral-100));
 }
 
+nav {
+	display: flex;
+	flex-direction: column;
+}
+
 body {
 	@include text-preset-6;
 
@@ -269,13 +262,12 @@ body {
 /* Utility Classes    */
 /* -----------------  */
 
-.flex {
+.split {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
-/* General Layout */
 .wrapper {
 	width: min(95vw, $wrapper-max-width);
 	margin-inline: auto;
@@ -283,7 +275,6 @@ body {
 	padding-block-start: $spacing-block-start;
 }
 
-// Screen Reader Only
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -300,7 +291,6 @@ body {
 	display: none;
 }
 
-// Skip Link
 .skip-to-content {
 	position: absolute;
 	z-index: 9999;
@@ -315,8 +305,6 @@ body {
 		transform: translateY(0);
 	}
 }
-
-/* Colors */
 
 /* Typography */
 h1,
@@ -350,6 +338,7 @@ h2,
 		border: 1px solid hsl(var(--clr-neutral-100));
 		padding: $size-16 $size-24;
 		margin-block: auto;
+		width: 14ch;
 	}
 
 	&__image {
@@ -362,10 +351,90 @@ h2,
 	}
 }
 
-nav {
-	display: flex;
-	flex-direction: column;
+.hamburger {
+	background: none;
+	border: none;
+	cursor: pointer;
+
+	.hamburger__icon--open {
+		display: inline-block;
+	}
+	.hamburger__icon--close {
+		display: none;
+		position: absolute;
+		top: $size-32;
+		right: $size-32;
+		z-index: 101;
+	}
+
+	&[aria-expanded='true'] {
+		.hamburger__icon--open {
+			display: none;
+		}
+		.hamburger__icon--close {
+			display: inline-block;
+		}
+	}
+
+	@media (min-width: 45em) {
+		display: none;
+	}
 }
+
+.card {
+	position: relative;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		background: $gradient-primary;
+		pointer-events: none;
+	}
+	&__title {
+		@include text-preset-5;
+
+		color: hsl(var(--clr-neutral-100));
+		position: absolute;
+		z-index: 10;
+		bottom: $size-16;
+		left: $size-16;
+		width: 10ch;
+		text-align: left;
+	}
+
+	picture,
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
+.btn {
+	@include text-preset-7;
+
+	cursor: pointer;
+	display: block;
+	text-transform: uppercase;
+	background-color: hsl(var(--clr-neutral-100));
+	border: 1px solid hsl(var(--clr-neutral-900));
+	padding: $size-10 $size-40;
+	margin: $size-32 auto;
+
+	&:hover,
+	&:focus {
+		background-color: hsl(var(--clr-neutral-900));
+		color: hsl(var(--clr-neutral-100));
+		border-color: hsl(var(--clr-neutral-100));
+	}
+}
+
+/* ----------------  */
+/* Navigation        */
+/* ----------------  */
 
 header .nav {
 	ul {
@@ -404,111 +473,6 @@ header .nav {
 	}
 }
 
-.hamburger {
-	background: none;
-	border: none;
-	cursor: pointer;
-
-	.hamburger__icon--open {
-		display: inline-block;
-	}
-	.hamburger__icon--close {
-		display: none;
-		position: absolute;
-		top: $size-32;
-		right: $size-32;
-		z-index: 101;
-	}
-
-	&[aria-expanded='true'] {
-		.hamburger__icon--open {
-			display: none;
-		}
-		.hamburger__icon--close {
-			display: inline-block;
-		}
-	}
-
-	@media (min-width: 45em) {
-		display: none;
-	}
-}
-
-.section {
-	text-align: center;
-	margin-block: $size-96;
-	&__image {
-		margin-block-end: $size-48;
-	}
-	&__title {
-		margin-block-end: $size-16;
-	}
-	&__text {
-		@include text-preset-6;
-
-		opacity: 0.5;
-		text-align: center;
-	}
-	@media (min-width: 45em) {
-		text-align: left;
-	}
-}
-
-.cards-section {
-	.grid {
-		display: grid;
-		gap: $size-24;
-
-		@media (min-width: 45em) {
-			grid-template-columns: repeat(auto-fill, 256px);
-		}
-	}
-}
-
-.card {
-	position: relative;
-
-	&::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		background: $gradient-primary;
-		pointer-events: none;
-	}
-	&__title {
-		@include text-preset-5;
-
-		color: hsl(var(--clr-neutral-100));
-		position: absolute;
-		z-index: 10;
-		bottom: $size-16;
-		left: $size-16;
-		width: 10ch;
-		text-align: left;
-	}
-}
-
-.btn {
-	@include text-preset-7;
-
-	cursor: pointer;
-	display: block;
-	text-transform: uppercase;
-	background-color: hsl(var(--clr-neutral-100));
-	border: 1px solid hsl(var(--clr-neutral-900));
-	padding: $size-10 $size-40;
-	margin: $size-32 auto;
-
-	&:hover,
-	&:focus {
-		background-color: hsl(var(--clr-neutral-900));
-		color: hsl(var(--clr-neutral-100));
-		border-color: hsl(var(--clr-neutral-100));
-	}
-}
-
 .nav__pages {
 	ul {
 		display: flex;
@@ -541,6 +505,57 @@ header .nav {
 				height: 24px;
 				width: 24px;
 			}
+		}
+	}
+}
+
+/* ----------------  */
+/* Sections          */
+/* ----------------  */
+
+.section {
+	text-align: center;
+	margin-block: $size-96;
+	&__image {
+		margin-block-end: $size-48;
+	}
+	&__title {
+		margin-block-end: $size-16;
+	}
+	&__text {
+		opacity: 0.5;
+		text-align: center;
+	}
+	@media (min-width: 45em) {
+		text-align: left;
+	}
+}
+
+.cards-section {
+	@media (min-width: 48em) {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 80px;
+
+		.section__title {
+			margin: unset;
+		}
+
+		.btn {
+			grid-column: 2/-1;
+			grid-row: 1;
+			align-self: start;
+			margin: 0;
+			justify-self: end;
+		}
+	}
+
+	.cards-grid {
+		grid-column: 1/-1;
+		display: grid;
+		gap: $size-24;
+		@media (min-width: 48em) {
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		}
 	}
 }
@@ -592,8 +607,6 @@ footer {
 	}
 
 	p {
-		@include text-preset-6;
-
 		color: hsl(var(--clr-neutral-100));
 		opacity: 0.5;
 		text-align: center;
@@ -604,13 +617,13 @@ footer {
 			text-align: right;
 		}
 	}
-}
 
-.footer-logo {
-	height: 24px;
-	margin-inline: auto;
+	.footer-logo {
+		height: 24px;
+		margin-inline: auto;
 
-	@media (min-width: 35em) {
-		margin: unset;
+		@media (min-width: 35em) {
+			margin: unset;
+		}
 	}
 }
